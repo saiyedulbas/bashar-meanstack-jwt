@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const User = require('../models/user');
 
-// Register
+
 router.post('/register', (req, res, next) => {
   let newUser = new User ({
     name: req.body.name,
@@ -23,7 +23,7 @@ router.post('/register', (req, res, next) => {
   });
 });
 
-// Authenticate
+
 router.post('/authenticate', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -38,7 +38,7 @@ router.post('/authenticate', (req, res, next) => {
       if(err) throw err;
       if(isMatch) {
         const token = jwt.sign({data: user}, config.secret, {
-          expiresIn: 604800 // 1 week
+          expiresIn: 604800 
         });
         res.json({
           success: true,
@@ -57,7 +57,7 @@ router.post('/authenticate', (req, res, next) => {
   });
 });
 
-// Profile
+
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
   res.json({user: req.user});
 });
