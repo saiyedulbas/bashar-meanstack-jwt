@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const config = require('../config/database');
-const User = require('../models/user');
+
+ const passport = require('passport');
+
+  const jwt = require('jsonwebtoken');
+
+   const config = require('../config/database');
+ const User = require('../models/user');
 
 
 router.post('/register', (req, res, next) => {
@@ -24,9 +27,9 @@ router.post('/register', (req, res, next) => {
 });
 
 
-router.post('/authenticate', (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
+  router.post('/authenticate', (req, res, next) => {
+      const username = req.body.username;
+   const password = req.body.password;
 
   User.getUserByUsername(username, (err, user) => {
     if(err) throw err;
@@ -58,8 +61,8 @@ router.post('/authenticate', (req, res, next) => {
 });
 
 
-router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+  router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
   res.json({user: req.user});
 });
 
-module.exports = router;
+ module.exports = router;
